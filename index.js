@@ -8,59 +8,59 @@ const tenRoundsArray = [];
 const houseArray = [];
 // function to populate the houseArray with numbers from 0-99
 const populateHouseArray = () => {
-	for (let i = 0; i <= 99; i++) {
-		houseArray.push(i);
-	}
+ for (let i = 0; i <= 99; i++) {
+  houseArray.push(i);
+ }
 };
 populateHouseArray();
 // function to select a random house from houseArray
 const randomSelector = (array) => {
-	return array[Math.floor(Math.random() * array.length)];
+ return array[Math.floor(Math.random() * array.length)];
 };
 // array of infected houses, in the beginning it only contains the first randomly selected infected house
 const infectedHouseArray = [randomSelector(houseArray)];
 const startZombieInfection = () => {
-	const zombieInfection = () => {
-		const selectHouseToInfect = () => {
-			amountOfRounds += 1;
-			// for each it selects new houses to infect and add to infectedHousesArray
-			infectedHouseArray.map(() => {
-				const selectedHouse = randomSelector(houseArray);
-				// conditional to check if house is infected already, if not it pushes to infectedHousesArray
-				if (!infectedHouseArray.includes(selectedHouse)) {
-					// push the infected house to the array
-					infectedHouseArray.push(selectedHouse);
-				}
-			});
-			// Visual presentation
-			document.getElementById('house-container').innerHTML = houseArray.map(
-				(item) => {
-					if (infectedHouseArray.includes(item)) {
-						return `<div class='house-div-red'></div>`;
-					} else {
-						return `<div class='house-div-green'></div>`;
-					}
-				}
-			);
-			// display the rounds to infect all
-			document.getElementById(
-				'rounds'
-			).innerHTML = `<p>Rounds to infect all: ${amountOfRounds}</p>`;
-			roundsArray.push(amountOfRounds);
-			// delay, so we can see the progress of the zombieinfection
-			if (infectedHouseArray.length < houseArray.length) {
-				setTimeout(selectHouseToInfect, 1000);
-			}
-		};
-		selectHouseToInfect();
-	};
-	if (tenRoundsArray < 10) {
-		/*This should repeat itself 10 times. setInterval? While-loop?
+ const zombieInfection = () => {
+  const selectHouseToInfect = () => {
+   amountOfRounds += 1;
+   // for each it selects new houses to infect and add to infectedHousesArray
+   infectedHouseArray.map(() => {
+    const selectedHouse = randomSelector(houseArray);
+    // conditional to check if house is infected already, if not it pushes to infectedHousesArray
+    if (!infectedHouseArray.includes(selectedHouse)) {
+     // push the infected house to the array
+     infectedHouseArray.push(selectedHouse);
+    }
+   });
+   // Visual presentation
+   document.getElementById('house-container').innerHTML = houseArray.map(
+    (item) => {
+     if (infectedHouseArray.includes(item)) {
+      return `<div class='house-div-red'></div>`;
+     } else {
+      return `<div class='house-div-green'></div>`;
+     }
+    }
+   );
+   // display the rounds to infect all
+   document.getElementById(
+    'rounds'
+   ).innerHTML = `<p>Rounds to infect all: ${amountOfRounds}</p>`;
+   roundsArray.push(amountOfRounds);
+   // delay, so we can see the progress of the zombieinfection
+   if (infectedHouseArray.length < houseArray.length) {
+    setTimeout(selectHouseToInfect, 1000);
+   }
+  };
+  selectHouseToInfect();
+ };
+ if (tenRoundsArray < 10) {
+  /*This should repeat itself 10 times. setInterval? While-loop?
     And I need to figure out where to push the final length of the roundsArray to tenRoundsArray.
     */
-		zombieInfection();
-	}
-	zombieInfection();
+  zombieInfection();
+ }
+ zombieInfection();
 };
 startZombieInfection();
 /* the average amount of rounds and displaying the result.
