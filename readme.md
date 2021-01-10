@@ -15,4 +15,5 @@ setTimeout to make the iterations visible
 How many rounds does it take to make all houses(divs) red?
 
 Show the average amount of rounds it took for the zombies to take over!
-# zombies
+
+
